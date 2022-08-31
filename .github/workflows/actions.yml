@@ -29,11 +29,12 @@ jobs:
         # providing reference of the input step. outputs is a keyword, time is output-keyword of hello-world-javascript-action output.
         # such defined keyword can be found in readme or in that repository documentation.
         
+      # Suppose any application is required to be clone on the runners VM's , so by default github actions
+      # won't take clone. We need to explicitly mentioned the cloning part using an offical actions provided by GitHub.
       - name: Cloning repositories on runner # Shows the current directory where all clones will occur and list the files.
         uses: actions/checkout@v1
         run: |
           pwd
           ls -a 
-          
-      # Suppose any application is required to be clone on the runners VM's , so by default github actions
-      # won't take clone. We need to explicitly mentioned the cloning part using an offical actions provided by GitHub.
+
+      
