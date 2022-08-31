@@ -1,0 +1,38 @@
+GitHub Actions automate software development workflows. It consists of individual tasks called as actions
+which can be combine to create a custom workflows.
+1. Workflows:
+    - Workflows are bunch of actions which performs certain tasks.
+    - Workflows are custom automated processes that can be set-up in a repository to build, test, package,
+      release or deploy any code project on GitHub.
+    - An example of workflow can be testing and deploying a code when someone pushes to master branch or
+      run some test when someone opens a pull request or issues.
+    - Workflows can be run on a schedule based instance. Like run the test on 6 p.m everyday.
+    - Workflows can also be run when an external events take place outside of GitHub.
+    - A Workflow contains one or more jobs and all the workflows run on a virtual machine.
+
+2. Events:
+    - Events on GitHub are like push, pull request or any issues etc. Due to such types of events workflows
+      are triggered. 
+
+3. Jobs:
+    - Each workflows have multiple numbers of jobs and each jobs has some number steps perform.
+    - A step can consits of some sorts of commands or actions.
+    - Jobs can run parellel or they can have dependence on each other. 
+
+4. A Runner:
+    - A runner is an any machine with the GitHub Actions runner application installed.
+    - A runner is responsible for running jobs whenever an event happends and displays back the result.
+    - It can be hosted by GitHub or one can have a self hosted runner.
+    - A. GitHub Hosted Runners:
+        - A GitHub Hosted Runners conists of pre-install softwares with virtual environments Linux , Windows or
+          MacOS.
+        - Pre-installed tools like curl,git,npm,yarn,pip etc.
+        - It is maintained by GitHub.
+        - One can not customized the hardware configuration of these Runners.
+    - B. Self Hosted Runners:
+        - A self hosted runners is a machine managed and maintain by that users with all required application
+          installed.
+        - One has more control of hardware, OS and software tools.
+        - Ideally required to control hardware like an example add more memory for larger jobs or choose an OS
+          not offered by GitHub Hosted Runners.
+

@@ -1,0 +1,75 @@
+# YAML is a data serialization language that is often used for writing configuration files. 
+# Depending on whom you ask, YAML stands for yet another markup language or YAML ain’t markup language 
+# (a recursive acronym), which emphasizes that YAML is for data, not documents.
+# It has KEY-VALUE pair sort of data.
+
+name: GitHub Actions
+Company: RBL
+Experience: 50
+Address: "Office: NOC"
+isBool: true
+
+#For lower identation use 2 spaces or 4 spaces
+
+# key: [ key: value, key2: value2] (Understanding format)
+key:
+  - key: value
+  - key2: value2
+
+#Newkey: [ key: value, key2: 33, key3: [ key: value, key2: value2 ]] (Understanding format)
+Newkey:
+  - key: value
+  - key2: 33
+  - key3:
+    - key: value
+    - key2: value2
+
+# JSON format also works in YAML. (Usually not used)
+JsonObject: { 
+      key: value,
+      key2: 33,
+      key3: {
+        key1: value,
+        key2: 33
+      }
+}
+
+#Arrays
+array:
+  - item1
+  - item2
+  - Object: value #item having a key-value pair.
+  - Object1: value1
+# OR Another format in array.
+NewArray: [ item1, item2, Object: value, Object1: value1 ]
+
+#Array having multiple objects
+ObjectArray:
+  - keyA1: valueA1
+    keyA2: valueA2
+  - keyB1: valueB1
+    keyB2: valueB2
+
+ObjectNewArray: [ [ keyA1: valueA1, keyA2: valueA2 ], [ keyB1: valueB1, keyB2: valueB2 ]]
+
+#Paragraph formatting having strings or text to display.
+
+no-new-line-text: >
+  This shows us that all 
+  text are not displayed 
+  as a new line. All text are 
+  considered as a single line.
+  For simple and easy view in YAML
+  it is showed.
+  View the output in JSON format.
+
+new-line-text: |
+  This shows us that all 
+  text are displayed 
+  as a new line. All text are not
+  considered as a single line.
+  For simple and easy view in YAML
+  it is showed.
+  View the output in JSON format.
+
+#This file is converted into JSON file name YAMLtoJSONConverted.json where /n is the next line 

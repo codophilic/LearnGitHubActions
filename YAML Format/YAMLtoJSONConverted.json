@@ -1,0 +1,91 @@
+{
+  "name": "GitHub Actions",
+  "Company": "RBL",
+  "Experience": 50,
+  "Address": "Office: NOC",
+  "isBool": true,
+  "key": [
+    {
+      "key": "value"
+    },
+    {
+      "key2": "value2"
+    }
+  ],
+  "Newkey": [
+    {
+      "key": "value"
+    },
+    {
+      "key2": 33
+    },
+    {
+      "key3": [
+        {
+          "key": "value"
+        },
+        {
+          "key2": "value2"
+        }
+      ]
+    }
+  ],
+  "JsonObject": {
+    "key": "value",
+    "key2": 33,
+    "key3": {
+      "key1": "value",
+      "key2": 33
+    }
+  },
+  "array": [
+    "item1",
+    "item2",
+    {
+      "Object": "value"
+    },
+    {
+      "Object1": "value1"
+    }
+  ],
+  "NewArray": [
+    "item1",
+    "item2",
+    {
+      "Object": "value"
+    },
+    {
+      "Object1": "value1"
+    }
+  ],
+  "ObjectArray": [
+    {
+      "keyA1": "valueA1",
+      "keyA2": "valueA2"
+    },
+    {
+      "keyB1": "valueB1",
+      "keyB2": "valueB2"
+    }
+  ],
+  "ObjectNewArray": [
+    [
+      {
+        "keyA1": "valueA1"
+      },
+      {
+        "keyA2": "valueA2"
+      }
+    ],
+    [
+      {
+        "keyB1": "valueB1"
+      },
+      {
+        "keyB2": "valueB2"
+      }
+    ]
+  ],
+  "no-new-line-text": "This shows us that all  text are not displayed  as a new line. All text are  considered as a single line. For simple and easy view in YAML it is showed. View the output in JSON format.\n",
+  "new-line-text": "This shows us that all \ntext are displayed \nas a new line. All text are not\nconsidered as a single line.\nFor simple and easy view in YAML\nit is showed.\nView the output in JSON format.\n"
+}
