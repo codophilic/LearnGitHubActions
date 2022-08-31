@@ -34,5 +34,6 @@ jobs:
         run: |
           pwd
           ls -a 
+          
       # Suppose any application is required to be clone on the runners VM's , so by default github actions
       # won't take clone. We need to explicitly mentioned the cloning part using an offical actions provided by GitHub.
