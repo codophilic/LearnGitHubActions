@@ -11,8 +11,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: print a string # Step-1 name
-      - run: echo "GitHub Actions" # Here the runner is ubuntu which will default use bash commands
-      - name: run multiple commands # Gets the node and npm version
-      - run: |
+        run: echo "GitHub Actions" # Here the runner is ubuntu which will default use bash commands
+      - name: run multiple commands # Gets the node and npm version #Step-2
+        run: |
           node -v     
           npm -v 
