@@ -7,12 +7,17 @@ on: [ push, pull_request ]
 
 # Run the jobs after triggering (List of steps)
 jobs:
-  run-shell-commands: # Job-1
+  run-shell-commands: # Job-1 name
     runs-on: ubuntu-latest
     steps:
       - name: print a string # Step-1 name
         run: echo "GitHub Actions" # Here the runner is ubuntu which will default use bash commands
-      - name: run multiple commands # Gets the node and npm version #Step-2
+      - name: run multiple commands # Gets the node and npm version # Step-2
         run: |
           node -v     
-          npm -v 
+          npm -v
+      - name: Run python commands # Step-3 
+        run: >
+          print("GitHub"
+          + "Actions")
+          
