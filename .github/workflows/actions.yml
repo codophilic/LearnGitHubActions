@@ -34,10 +34,22 @@ jobs:
       - name: Cloning repositories on runner # Shows the current directory where all clones will occur and list the files.
         uses: actions/checkout@v1
 
-      # In a step, 'uses' and 'run' cannot be together.
+      # In a step, 'uses' and 'run' cannot be together. It will throw a syntax sort of error
       - name: Run Bash commands
         run: |
           pwd
-          ls -a 
+          ls -a
+      
+      # Environment variables set-up by GitHub automatically
+      - name: Environment variables
+        run: |
+          echo $GITHUB_SHA "This variable gives the commit ID which triggered the workflow"
+          echo $GITHUB_REPOSITORY "This variable gives the username and repository name"
+          echo $GITHUB_WORKSPACE "This variable gives the pwd directory"
+          echo ${{ github.token }} "This variables gives display the access token"
+          
+
+
+      
 
       
