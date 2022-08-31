@@ -20,4 +20,5 @@ jobs:
         run: >
           print("GitHub"
           + "Actions")
+        shell: python # If any other command is use , we need to specify the shell to run that command.
           
