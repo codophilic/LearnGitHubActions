@@ -1,0 +1,2 @@
+1. GitHub Actions is not free for private repository it has certain limit.
+2. All workflows must be under '.github' folder.

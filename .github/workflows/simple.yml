@@ -1,0 +1,18 @@
+# Here in this workflow we will be running commands on any events.
+
+name: Shell Commands
+
+# Trigger workflow on below events
+on: [ push, pull_request ]
+
+# Run the jobs after triggering (List of steps)
+jobs:
+  run-shell-commands: # Job-1
+    runs-on: ubuntu-latest
+    steps:
+      - name: print a string # Step-1 name
+      - run: echo "GitHub Actions" # Here the runner is ubuntu which will default use bash commands
+      - name: run multiple commands # Gets the node and npm version
+      - run: |
+          node -v     
+          npm -v 
