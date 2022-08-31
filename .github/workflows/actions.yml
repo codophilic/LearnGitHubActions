@@ -1,0 +1,30 @@
+# When we use any certain action it means that the particular action is refered to internet 
+# repositories where that steps of that actions is pre-defined.
+name: Actions Workflows
+
+on: [ push, pull_request ]
+
+jobs:
+  run-github-actions:
+    runs-on: ubuntu-latest
+    steps:
+      - name: simple javascript Actions
+        id: greet # STEP-1 ID
+        uses: actions/hello-world-javascript-action@v1 
+        # It takes reference to the actions which is publish on GitHub public repositories. 
+        # Syntax: username/repo-name@version-or-branch e.g actions/hello-world-javascript-action@master
+        # We can also reference the actions to a particular commit of a repository
+        # e.g actions//hello-world-javascript-action@SHA_ID.
+        # It is always recommended to reference a version or SHA ID rather than branch because if any new commit is 
+        # added on the branch and if that fails to maintain its characteristic the workflow refering 
+        # it may also fail. 
+        with:
+          who-to-greet: Harsh 
+        # If a particular actions requires inputs, we can provide it using 'with' key.
+        # What should be the input variable name? refer the readme of that particular action repository.
+      
+      - name: Get the output of hello-world-javascript-action
+        run: echo "${{ steps.greet.outputs.time }}" # refering input step greet
+        # Suppose any actions also provides the outputs , and you want that output , one can do it by 
+        # providing reference of the input step. outputs is a keyword, time is output-keyword of hello-world-javascript-action output.
+        # such defined keyword can be found in readme or in that repository documentation.
