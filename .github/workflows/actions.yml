@@ -31,22 +31,31 @@ jobs:
         
       # Suppose any application is required to be clone on the runners VM's , so by default github actions
       # won't take clone. We need to explicitly mentioned the cloning part using an offical actions provided by GitHub.
+      # The checkout actions can also takes inputs.
       - name: Cloning repositories on runner # Shows the current directory where all clones will occur and list the files.
         uses: actions/checkout@v1
-
-      # In a step, 'uses' and 'run' cannot be together. It will throw a syntax sort of error
-      - name: Run Bash commands
+      # Here run is used an another item, not used with keyword 'uses'
+      - name: Run Bash command
         run: |
           pwd
           ls -a
-      
+
+      # Provide an example of an input for checkout action is applied for a particular branch.
+      - name: Example of an input for checkout action 
+        uses: actions/checkout@v3
+        with:
+          ref: main
+
+
       # Environment variables set-up by GitHub automatically
       - name: Environment variables
         run: |
           echo $GITHUB_SHA "This variable gives the commit ID which triggered the workflow"
           echo $GITHUB_REPOSITORY "This variable gives the username and repository name"
           echo $GITHUB_WORKSPACE "This variable gives the pwd directory"
-          echo ${{ github.token }} "This variables gives display the access token"
+          echo ${{ github.token }} "This variables can be use to authenticate to github repository"
+
+# All actions created by people are found under GitHub marketplace. Some actions are verified by GitHub some are not.
           
 
 
