@@ -22,12 +22,19 @@ jobs:
           + "Actions")
         shell: python # If any other command is use , we need to specify the shell to run that command.
   
-  run-Windows-command: #JOB-2 name
+  run-Windows-command: #JOB-2 name ( Here two jobs JOB-1 and JOB-2 will run parallelly )
     runs-on: windows-latest #On ubuntu we cannot run windows command
     steps:
       - name: Output the current directory using Powershell # STEP-1 name
         run: Get-Location 
       - name: Output the current directory using bash # STEP-2 name # On windows runner we can run bash commands.
         run: pwd # Bash commmand
-        shell: bash
+        shell: bash #Specify the shell
+
+  run-Windows-command-after-JOB1: # JOB-3 name ( Here JOB-3 will run after completion of JOB-1)
+    runs-on: windows-latest
+    needs: [ "run-shell-commands" ] # In needs we need to mentioned the JOB ID or name so after that jobs execution this will run.
+    steps:
+      - name: Output the current directory using Powershell # STEP-1 name
+        run: Get-Location
           
