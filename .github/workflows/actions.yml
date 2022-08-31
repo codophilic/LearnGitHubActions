@@ -1,5 +1,5 @@
-# When we use any certain action it means that the particular action is refered to internet 
-# repositories where that steps of that actions is pre-defined.
+# When we use any defined action of other users it means that the particular action is refered to internet 
+# public repositories where that steps of that actions is pre-defined.
 name: Actions Workflows
 
 on: [ push, pull_request ]
@@ -28,3 +28,11 @@ jobs:
         # Suppose any actions also provides the outputs , and you want that output , one can do it by 
         # providing reference of the input step. outputs is a keyword, time is output-keyword of hello-world-javascript-action output.
         # such defined keyword can be found in readme or in that repository documentation.
+        
+      - name: Cloning repositories on runner # Shows the current directory where all clones will occur and list the files.
+        uses: actions/checkout@v1
+        run: |
+          pwd
+          ls -a 
+      # Suppose any application is required to be clone on the runners VM's , so by default github actions
+      # won't take clone. We need to explicitly mentioned the cloning part using an offical actions provided by GitHub.
