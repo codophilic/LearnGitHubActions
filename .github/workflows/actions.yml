@@ -33,6 +33,9 @@ jobs:
       # won't take clone. We need to explicitly mentioned the cloning part using an offical actions provided by GitHub.
       - name: Cloning repositories on runner # Shows the current directory where all clones will occur and list the files.
         uses: actions/checkout@v1
+
+      # In a step, 'uses' and 'run' cannot be together.
+      - name: Run Bash commands
         run: |
           pwd
           ls -a 
