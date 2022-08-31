@@ -7,18 +7,27 @@ on: [ push, pull_request ]
 
 # Run the jobs after triggering (List of steps)
 jobs:
-  run-shell-commands: # Job-1 name
+  run-shell-commands: # JOB-1 name
     runs-on: ubuntu-latest
     steps:
-      - name: print a string # Step-1 name
+      - name: print a string # STEP-1 name
         run: echo "GitHub Actions" # Here the runner is ubuntu which will default use bash commands
-      - name: run multiple commands # Gets the node and npm version # Step-2
+      - name: run multiple commands # STEP-2 # Gets the node and npm version 
         run: |
           node -v     
           npm -v
-      - name: Run python commands # Step-3 
+      - name: Run python commands # STEP-3 
         run: >
           print("GitHub"
           + "Actions")
         shell: python # If any other command is use , we need to specify the shell to run that command.
+  
+  run-Windows-command: #JOB-2 name
+    runs-on: windows-latest #On ubuntu we cannot run windows command
+    steps:
+      - name: Output the current directory using Powershell # STEP-1 name
+        run: Get-Location 
+      - name: Output the current directory using bash # STEP-2 name # On windows runner we can run bash commands.
+        run: pwd # Bash commmand
+        shell: bash
           
