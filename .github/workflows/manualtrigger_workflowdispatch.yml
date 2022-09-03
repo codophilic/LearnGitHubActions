@@ -39,10 +39,10 @@ jobs:
         run: echo "GitHub Actions Manual Trigger" # Here the runner is ubuntu which will default use bash commands.
       - name: inputs of the workflow_dispatch
         env:
-          INPUT1: ${{ inputs.manual.description }}
-          INPUT2: ${{ inputs.manual.default }}
-          INPUT3: ${{ inputs.branch_env.description }}
-          INPUT4: ${{ inputs.branch_env.default }}
+          INPUT1: ${{ inputs.manual }}
+          INPUT2: ${{ inputs.manual }}
+          INPUT3: ${{ inputs.branch_env }}
+          INPUT4: ${{ inputs.branch_env}}
         run: |
           echo "first input: $INPUT1"
           echo "second input: $INPUT2"
