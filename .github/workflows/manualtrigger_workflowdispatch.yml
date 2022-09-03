@@ -1,6 +1,6 @@
 # Here in this workflow we will be running commands on any events.
 
-name: Manual Trigger
+name: Manual Trigger workflow_dispatch
 
 # Manual Trigger workflow on events
 # Trigger workflow manually using 'repository_dispatch' or 'workflow_dispatch'
