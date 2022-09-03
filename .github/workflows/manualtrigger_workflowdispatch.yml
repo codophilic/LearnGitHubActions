@@ -1,0 +1,34 @@
+# Here in this workflow we will be running commands on any events.
+
+name: Manual Trigger
+
+# Manual Trigger workflow on events
+# Trigger workflow manually using 'repository_dispatch' or 'workflow_dispatch'
+# Using workflow_dispatch we can manually trigger a workflow run using the GitHub API, GitHub CLI, or GitHub browser interface. 
+# We can define custom inputs.
+# https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows#workflow_dispatch
+# When inputs are defined we need to mentioned the required state of that input.
+
+on:
+  workflow_dispatch:
+    inputs:
+      manual:
+        description: "Triggered"
+        required: true
+
+
+# Run the jobs after triggering (List of steps)
+jobs:
+  Manual-Trigger-JOB: # JOB-1 name
+    runs-on: ubuntu-latest
+    steps:
+      - name: Manual Trigger event # STEP-1 name
+        run: echo "GitHub Actions Manual Trigger" # Here the runner is ubuntu which will default use bash commands.
+      - name: inputs of the workflow_dispatch
+      - env:
+          INPUT1: ${{ inputs.manual.description }}
+          INPUT2: ${{ inputs.manual.required }}
+        run: |
+          echo "first input: $INPUT1"
+          echo "second input: $INPUT2"
+
