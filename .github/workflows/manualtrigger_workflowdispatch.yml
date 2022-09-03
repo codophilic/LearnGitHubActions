@@ -7,7 +7,11 @@ name: Manual Trigger workflow_dispatch
 # Using workflow_dispatch we can manually trigger a workflow run using the GitHub API, GitHub CLI, or GitHub browser interface. 
 # We can define custom inputs.
 # https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows#workflow_dispatch
-# When inputs are defined we need to mentioned the required state of that input.
+# When inputs are defined we need to mentioned the required state of that input so that it will show in
+# manual trigger workflow.
+# required: true is like a mandatory field when we see on GitHub browser.
+# Now here input 'manual' has a description 'Triggered' which will be shown as required field and value as
+# 'Triggering manually'.
 
 on:
   workflow_dispatch:
@@ -15,6 +19,15 @@ on:
       manual:
         description: "Triggered"
         required: true
+        default: 'Triggering manually'
+      branch_env:
+        description: "Branch name"
+        required: true
+        default: 'main'
+      commitID:
+        description: 'Commit ID'
+        required: false
+        default: 'latest'
 
 
 # Run the jobs after triggering (List of steps)
@@ -27,8 +40,12 @@ jobs:
       - name: inputs of the workflow_dispatch
         env:
           INPUT1: ${{ inputs.manual.description }}
-          INPUT2: ${{ inputs.manual.required }}
+          INPUT2: ${{ inputs.manual.default }}
+          INPUT3: ${{ inputs.branch_env.description }}
+          INPUT4: ${{ inputs.branch_env.default }}
         run: |
           echo "first input: $INPUT1"
           echo "second input: $INPUT2"
+          echo "third input: $INPUT3"
+          echo "fourth input: $INPUT4"
 
