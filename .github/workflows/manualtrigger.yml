@@ -10,6 +10,9 @@ name: Manual Trigger
 # We need to also specify event types just like for pull request event types where opened, closed etc.
 # We need to also generate token to authorized our request.
 # After adding the token , send the request and we will get 204 HTTPS success code. 
+# After pushing the manual yaml file , send the POST request after that only workflow will be triggered.
+# The client_payload parameter is available for any extra information that your workflow might need. 
+# This parameter is a JSON payload that will be passed on when the webhook event is dispatched.
 on:
   repository_dispatch:
     types: [ build ]
@@ -20,4 +23,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Manual Trigger event # STEP-1 name
-        run: echo "GitHub Actions Manual Trigger" # Here the runner is ubuntu which will default use bash commands
+        run: echo "GitHub Actions Manual Trigger" # Here the runner is ubuntu which will default use bash commands.
+      - name: client payload value
+        run: |
+          echo ${{ github.event.client_payload.info }}
+          echo ${{ github.event.client_payload.description }}
