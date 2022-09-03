@@ -3,6 +3,39 @@
 name: Actions Workflows
 
 on: [ push, pull_request ]
+# TRIGGERING EVENTS 
+# 
+# 
+# Suppose we want to run status checks for only opened or other acitivity types of pull request and on push events
+# on:
+#   push: #( for push there are no activities thats why it is empty)
+#   pull_request:
+#     types: [ closed, reopened, assigned, opened ]
+
+# # Suppose we need to schedule the events using cron jobs. Since we are using a schedule event don't use push trigger.
+# Cron is a time-based job scheduler
+# on:
+#   schedule:
+#     - cron: "* * * * * "  #cron schedule expression->(minutes hours Day_of_a_month month Day_of_a_week) # "* * * * *" will trigger every time.
+#     - cron: "* * * * * " # We can have multiple cron job also.
+# https://crontab.guru/ -> evaluate the expression and tell its meaning with examples.
+# cron expression examples:
+# 1. "1 * * * *" -> This means our workflow will run at minute 1 of every hour of all days( like 12:01,13:01,14:01 etc.)
+# 2. "1,2 * * * *" -> This means our workflow will run at minute 1 and 2 of every hour
+# 3. "1-10 * * * *" -> This means our workflow will run from minute 1 to 10 of every hour (12:01,12:02,12:03,12:04..12:10)
+# 4. "0/15 * * * *" -> This means every 15th of minute of 0-59 minutes. (12:15,12:30,12:45 etc.)
+# 5. "20/15 * * * *" -> This means every 15th of minute of starting from 20 minute. (12:20,12:35,12:50 etc.)
+# 6. "0 12 * * *" -> This means every day of 12 hour. (Day1 12:00, Day2 12:00, Day3 12:00 etc.) ( As per UTC )
+# 7. "0 12 1 * *" -> This means every month of day 1 at 12:00 .
+# 8. "0 12 1 1 *" -> This means every year at January month of day 1 at 12:00 . 
+#         OR
+#    "0 12 1 JAN *" -> This means every year at January month of day 1 at 12:00 .
+# 9. "0 12 * 1 0" -> This means every year at January month of sunday at 12:00. (0 -> Sunday 6->Saturday)
+#         OR 
+#    "0 12 * 1 SUN" -> This means every year at January month of sunday at 12:00. (0 -> Sunday 6->Saturday)
+
+
+
 
 jobs:
   run-github-actions:

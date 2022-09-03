@@ -1,0 +1,23 @@
+# Here in this workflow we will be running commands on any events.
+
+name: Manual Trigger
+
+# Manual Trigger workflow on events
+# Trigger workflow manually using 'repository_dispatch' or 'workflow_dispatch'
+# Using repository_dispatch we need to send POST request using GitHub APIS curl commands. ( Here to send the POST request POSTMAN is used )
+# https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows#repository_dispatch
+# So in the POSTMAN POST url entered is https://api.github.com/repos/codophilic/LearnGitHubActions/dispatches
+# We need to also specify event types just like for pull request event types where opened, closed etc.
+# We need to also generate token to authorized our request.
+# After adding the token , send the request and we will get 204 HTTPS success code. 
+on:
+  repository_dispatch:
+    types: [ build ]
+
+# Run the jobs after triggering (List of steps)
+jobs:
+  Manual-Trigger-JOB: # JOB-1 name
+    runs-on: ubuntu-latest
+    steps:
+      - name: Manual Trigger event # STEP-1 name
+        run: echo "GitHub Actions Manual Trigger" # Here the runner is ubuntu which will default use bash commands
