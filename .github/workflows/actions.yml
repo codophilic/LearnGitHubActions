@@ -34,8 +34,45 @@ on: [ push, pull_request ]
 #         OR 
 #    "0 12 * 1 SUN" -> This means every year at January month of sunday at 12:00. (0 -> Sunday 6->Saturday)
 
+# Trigger Workflow Events by using branches, tags or by paths
+# on:
+#   push:
+#     branches: [ main,uat,qa ]
+#   pull_request:
+#     branches: [ main,uat,qa ]
 
+# Suppose we want to trigger workflows on pattern matching branches
+# https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#filter-pattern-cheat-sheet
+# on:
+#   push:
+#     branches:
+#       - main
+#       - 'OneQ-*' # So branches like OneQ-A,OneQ-B etc. starting with 'OneQ-' but it won't match 'OneQ-A-B' sort of patterns.
+#       - 'OneQ-**' # This will match OneQ-A,OneQ-B etc. as well as OneQ-A-B.
+#       - '!OneQ-NotFixed' # This will exclude this particular branch.
 
+# Suppose we want to trigger workflows for all branches except some
+# on:
+#   push:
+#     branches-ignore:
+#       - bugfix
+#       - anyother
+# Keyword 'branches-ignore' and 'branches' cannot be used together.
+
+# Using tags and paths as trigger events.
+# similarly for branches we have patter matching and branch ignorance for tags and paths also.
+# Paths means suppose we want to trigger workflows only for particular files which is changed.
+# Here used .txt files , so when any .txt files is changed this will triggered the workflow.
+# on:
+#   push:
+#     branches:
+#       - main
+#     tags:
+#       - v1.*
+#     paths:
+#       - '**.txt'
+#       - docs/**
+#       - '!file1.txt'
 
 jobs:
   run-github-actions:
