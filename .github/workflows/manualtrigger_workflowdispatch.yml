@@ -25,7 +25,7 @@ jobs:
       - name: Manual Trigger event # STEP-1 name
         run: echo "GitHub Actions Manual Trigger" # Here the runner is ubuntu which will default use bash commands.
       - name: inputs of the workflow_dispatch
-      - env:
+        env:
           INPUT1: ${{ inputs.manual.description }}
           INPUT2: ${{ inputs.manual.required }}
         run: |

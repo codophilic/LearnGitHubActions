@@ -6,6 +6,7 @@ name: Shell Commands
 on: [ push, pull_request ]
 
 # Run the jobs after triggering (List of steps)
+# Every step must define a `uses` or `run` key or it will throw and Error. 
 jobs:
   run-shell-commands: # JOB-1 name
     runs-on: ubuntu-latest
