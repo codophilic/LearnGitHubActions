@@ -85,7 +85,7 @@ jobs:
           # --yes to assume "yes" for questions
       - name: Verify the values of JSON file after decrypting
         run: 
-          cat secret.json 
+          cat $HOME/secret.json 
 
 
 
