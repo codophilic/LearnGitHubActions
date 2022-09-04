@@ -3,11 +3,12 @@ name: Environment Variables
 on: [ push, pull_request ]
 
 # Environment variable (Global sort of for ALL JOBS) (applicable to whole workflow)
+# Defining en variables always use underscore and not hypen.
 env:
   Workflow_ENV: Available to all JOBS
 
 jobs:
-  Print-ENV-Variables: #JOB1
+  Print-Define-ENV-Variables: #JOB1
     runs-on: ubuntu-latest
     # Applying EVN for particular JOB (local sort of at JOB level) ( applicable to only particular JOB)
     env:
@@ -26,4 +27,25 @@ jobs:
           echo "Global Variable: ${Workflow_ENV} (True)"
           echo " Local Variable at JOB level: ${Local_ENV} (True)"
           echo " Local Variable at step lebel: ${step_ENV_variable} (False)"
+  
+  Print-Default-ENV-Variables:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Default ENV variables provided by GitHub Actions
+        run: |
+          echo "HOME Directory: ${HOME}"
+          echo "GITHUB_WORKFLOW: ${GITHUB_WORKFLOW}"
+          echo "GITHUB_ACTION: ${GITHUB_ACTION}"
+          echo "GITHUB_ACTIONS: ${GITHUB_ACTIONS}"
+          echo "GITHUB_ACTOR: ${GITHUB_ACTOR}"
+          echo "GITHUB_REPOSITORY: ${GITHUB_REPOSITORY}"
+          echo "GITHUB_EVENT_NAME: ${GITHUB_EVENT_NAME}"
+          echo "GITHUB_WORKSPACE: ${GITHUB_WORKSPACE}"
+          echo "GITHUB_SHA: ${GITHUB_SHA}"
+          echo "GITHUB_REF: ${GITHUB_REF}"
+          echo "Global Variable: ${Workflow_ENV} (True)"
+          echo " Local Variable at JOB level: ${Local_ENV} (False)"
+          echo " Local Variable at step lebel: ${step_ENV_variable} (False)"
+
+
 
