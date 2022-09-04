@@ -30,19 +30,20 @@ jobs:
   
   Print-Default-ENV-Variables:
   # https://docs.github.com/en/actions/learn-github-actions/environment-variables
+  # ${{ github.entity }}
     runs-on: ubuntu-latest
     steps:
       - name: Default ENV variables provided by GitHub Actions
         run: |
           echo "HOME Directory: ${HOME}"
-          echo "GITHUB_WORKFLOW: ${GITHUB_WORKFLOW}"
+          echo "GITHUB_WORKFLOW: ${GITHUB_WORKFLOW} OR ${{ github.workflow }} "
           echo "GITHUB_ACTION: ${GITHUB_ACTION}"
           echo "GITHUB_ACTIONS: ${GITHUB_ACTIONS}"
           echo "GITHUB_ACTOR: ${GITHUB_ACTOR}"
-          echo "GITHUB_REPOSITORY: ${GITHUB_REPOSITORY}"
+          echo "GITHUB_REPOSITORY: ${GITHUB_REPOSITORY} OR ${{ github.repository }}"
           echo "GITHUB_EVENT_NAME: ${GITHUB_EVENT_NAME}"
-          echo "GITHUB_WORKSPACE: ${GITHUB_WORKSPACE}"
-          echo "GITHUB_SHA: ${GITHUB_SHA}"
+          echo "GITHUB_WORKSPACE: ${GITHUB_WORKSPACE} OR ${{ github.workspace }}"
+          echo "GITHUB_SHA: ${GITHUB_SHA} OR ${{ github.sha }}"
           echo "GITHUB_REF: ${GITHUB_REF}"
           echo "Global Variable: ${Workflow_ENV} (True)"
           echo " Local Variable at JOB level: ${Local_ENV} (False)"
