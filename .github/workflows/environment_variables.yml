@@ -29,6 +29,7 @@ jobs:
           echo " Local Variable at step lebel: ${step_ENV_variable} (False)"
   
   Print-Default-ENV-Variables:
+  # https://docs.github.com/en/actions/learn-github-actions/environment-variables
     runs-on: ubuntu-latest
     steps:
       - name: Default ENV variables provided by GitHub Actions
@@ -46,6 +47,20 @@ jobs:
           echo "Global Variable: ${Workflow_ENV} (True)"
           echo " Local Variable at JOB level: ${Local_ENV} (False)"
           echo " Local Variable at step lebel: ${step_ENV_variable} (False)"
+  
+  Print-Secrets-Variables:
+    # Define Secrets value by going into Repo SETTINGS->SECRETS
+    # Secrets help to ecrypt the variables like password ,token ,API key etc.
+    runs-on: ubuntu-latest
+    steps:
+      - name: Echo Secrets variables
+        env:
+          secrets_env: ${{ secrets.SECRET_VARIABLE }}
+          Personal_Access_Token: ${{ secrets.GITHUB_TOKEN }} # A default variable by GITHUB ACTIONS.
+        run: |
+          echo "Secret value which will be shown as *** ${secrets_env}"
+          echo "Secret value which will be shown as *** ${Personal_Access_Token}"
+
 
 
 
