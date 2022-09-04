@@ -13,7 +13,7 @@ jobs:
           echo ${{ 1 }}
           echo ${{ 'Hello Actions' }}
           echo ${{ 1>2 }}
-          echo ${{ "ABC" == "DEF" }}
+          echo ${{ 'ABC' == 'DEF' }}
       
   LearnAboutContexts:
         # In expression ${{ secrets.GITHUB_TOKEN }} secrets are contexts which are called objects.
