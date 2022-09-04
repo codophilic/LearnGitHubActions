@@ -20,5 +20,37 @@ jobs:
             "body": "This issue was automatically created by the GitHub Action workflow **${{ github.workflow }}** . \n\n The commit hash was:_${{ github.sha }}_. "
             }' \
           --fail
+  
+  AutoBot-Commit:
+    # Creates an autocommit for a file.
+    # So basically we will initialize a repository on runner and commit a new file which has random numbers
+    # using RANDOM bash command. After committing we will push it to origin.
+    runs-on: ubuntu-latest
+    steps:
+      - name: AutoBot Commit by Codophillic-Bot
+        run: |
+          pwd
+          ls -a 
+          mkdir AutoCommitFolder
+          ls -a 
+          cd AutoCommitFolder
+          git init
+          git remote add origin 'https://${{ github.actor }}:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git'
+          git config user.name "Codophilic-bot"
+          git config user.email "Codophilic-bot@bot.com"
+          git fetch
+          git checkout main
+          git branch --set-upstream-to=origin/main
+          git pull
+          ls -a
+          echo $RANDOM >> randomfile.txt
+          git add .
+          git commit -m 'Codophilic Bot committed randomfile.txt'
+          git push 
+          
+          
+
+
+
 
 
