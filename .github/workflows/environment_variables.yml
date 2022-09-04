@@ -80,7 +80,7 @@ jobs:
         env:
           PASSPHRASE: ${{ secrets.PASSPHRASE }}
         run: |
-          gpg --quiet --batch --yes --decrypt --passphrase="$PASSPHRASE" --output $HOME/secret.json
+          gpg --quiet --batch --yes --decrypt --passphrase="$PASSPHRASE" --output $HOME/secret.json secret.json.gpg 
           # --batch to prevent interactive command
           # --yes to assume "yes" for questions
       - name: Verify the values of JSON file after decrypting
