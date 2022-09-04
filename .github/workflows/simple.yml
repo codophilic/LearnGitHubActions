@@ -7,6 +7,7 @@ on: [ push, pull_request ]
 
 # Run the jobs after triggering (List of steps)
 # Every step must define a `uses` or `run` key or it will throw and Error. 
+# If any steps fails then the next steps won't run. We can add some built-in job function to make them run even if previous steps fails
 jobs:
   run-shell-commands: # JOB-1 name
     runs-on: ubuntu-latest

@@ -1,6 +1,6 @@
 name: Expression and contexts
 
-on: push
+on: [ push, pull_request ]
 
 jobs:
   LearnAboutExpression:
@@ -14,7 +14,39 @@ jobs:
           echo ${{ 'Hello Actions' }}
           echo ${{ 1>2 }}
           echo ${{ 'ABC' == 'DEF' }}
-      
+
+  LearnAboutFunctions:
+    # Some built-in functions https://docs.github.com/en/actions/learn-github-actions/expressions#functions
+    runs-on: ubuntu-latest
+    steps:
+      - name: Functions
+        # Below functions will return boolean values.
+        run: |
+          echo ${{ contains( 'hello', 'll' ) }}
+          echo ${{ startsWith( 'hello', 'he' ) }}
+          echo ${{ endsWith( 'hello', 'lo' ) }}
+          echo ${{ format( 'Hello {0} {1} {2}' , 'World','Welcome to','GitHub Actions' ) }}
+  
+  JobStatusFunction:
+    # Provide Information about JOBS.
+    # You can use the following status check functions as expressions in if conditionals. 
+    # A default status check of success() is applied unless you include one of these functions.
+    # https://docs.github.com/en/actions/learn-github-actions/expressions#status-check-functions
+    # failure() returns true if any of previous step fails.
+    # always() returns true always runs.
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push'
+    steps:
+    - name: Run step-1
+      run: eccho 'Error command'
+    - name: Run step-2 even if step-1 is failure
+      if: failure()
+      run: echo 'Step-1 failed, step-2 executed'
+    - name: Run step-3 which won't run because step-1 failed
+      run: echo 'Not run'
+    - name: Run step-4 always even if any step fails or succeed.
+      if: always()
+      run: echo 'Always RUNS'      
   LearnAboutContexts:
         # In expression ${{ secrets.GITHUB_TOKEN }} secrets are contexts which are called objects.
         # Contexts are a way to access information about workflow runs, runner environments, jobs, and steps. 
