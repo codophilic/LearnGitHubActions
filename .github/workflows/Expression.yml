@@ -1,0 +1,38 @@
+name: Expression and contexts
+
+on: push
+
+jobs:
+  LearnAboutExpression:
+  # ${{ any_Type_of_values }} can an expression have.
+  # https://docs.github.com/en/actions/learn-github-actions/expressions
+    runs-on: ubuntu-latest
+    steps:
+      - name: Expression can have boolean, number, string values or functions
+        run: |
+          echo ${{ 1 }}
+          echo ${{ 'Hello Actions' }}
+          echo ${{ 1>2 }}
+          echo ${{ "ABC" == "DEF" }}
+      
+  LearnAboutContexts:
+        # In expression ${{ secrets.GITHUB_TOKEN }} secrets are contexts which are called objects.
+        # Contexts are a way to access information about workflow runs, runner environments, jobs, and steps. 
+        # Each context is an object that contains properties, which can be strings or other objects.
+        # https://docs.github.com/en/actions/learn-github-actions/contexts
+        # toJSON is a function used which converts context into JSON format. Here context are github,job,steps,runner etc.
+    runs-on: ubuntu-latest
+    steps:
+      - name: Dump GitHub context
+        id: github_context_step
+        run: echo '${{ toJSON(github) }}'
+      - name: Dump job context
+        run: echo '${{ toJSON(job) }}'
+      - name: Dump steps context
+        run: echo '${{ toJSON(steps) }}'
+      - name: Dump runner context
+        run: echo '${{ toJSON(runner) }}'
+      - name: Dump strategy context
+        run: echo '${{ toJSON(strategy) }}'
+      - name: Dump matrix context
+        run: echo '${{ toJSON(matrix) }}'
