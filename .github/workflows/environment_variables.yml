@@ -1,0 +1,29 @@
+name: Environment Variables
+
+on: [ push, pull_request ]
+
+# Environment variable (Global sort of for ALL JOBS) (applicable to whole workflow)
+env:
+  Workflow_ENV: Available to all JOBS
+
+jobs:
+  Print-ENV-Variables: #JOB1
+    runs-on: ubuntu-latest
+    # Applying EVN for particular JOB (local sort of at JOB level) ( applicable to only particular JOB)
+    env:
+      Local-ENV: Available to JOB1 only and for all steps of JOB1
+    steps:
+      - name: ECHO ENV Variables for STEP-1
+      # Applying ENV for particular step (local sort of at STEP level ) (applicable to only particular step of a JOB)
+        env:
+          step-ENV-variable: Available to only this step
+        run: |
+          echo "Global Variable: ${Workflow_ENV} "
+          echo " Local Variable at JOB level: ${Local-ENV} "
+          echo " Local Variable at step lebel: ${step-ENV-variable} "
+      - name: ECHO ENV Variables of STEP-1
+        run: |
+          echo "Global Variable: ${Workflow_ENV} (True)"
+          echo " Local Variable at JOB level: ${Local-ENV} (True)"
+          echo " Local Variable at step lebel: ${step-ENV-variable} (False)"
+
