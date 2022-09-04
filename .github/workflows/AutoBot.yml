@@ -17,7 +17,7 @@ jobs:
           --header 'content-type: application/json' \
           --data '{
             "title": "Automated issue for commit: $GITHUB_SHA",
-            "body": "This issue was automatically created by the GitHub Action workflow **$GITHUB_WORKFLOW**. \n\n The commit hash was: _${ GITHUB_SHA }_."
+            "body": "This issue was automatically created by the GitHub Action workflow **$GITHUB_WORKFLOW**. \n\n The commit hash was:  $GITHUB_SHA."
             }' \
           --fail
 
