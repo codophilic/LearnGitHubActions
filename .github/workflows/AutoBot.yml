@@ -1,0 +1,24 @@
+name: AutoBot Workflow
+
+on: push
+
+jobs:
+  AutoBot-Issue:
+    # Below example workflow creates an issue using the GitHub REST API
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write 
+    steps:
+      - name: Create issue using REST API
+        run: |
+          curl --request POST \
+          --url https://api.github.com/repos/${{ GITHUB_REPOSITORY }}/issues \
+          --header 'authorization: Bearer ${{ secrets.GITHUB_TOKEN }}' \
+          --header 'content-type: application/json' \
+          --data '{
+            "title": "Automated issue for commit: ${{ github.sha }}",
+            "body": "This issue was automatically created by the GitHub Action workflow **${{ GITHUB_WORKFLOW }}**. \n\n The commit hash was: _${{ github.sha }}_."
+            }' \
+          --fail
+
+

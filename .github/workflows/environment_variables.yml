@@ -51,6 +51,8 @@ jobs:
   Print-Secrets-Variables:
     # Define Secrets value by going into Repo SETTINGS->SECRETS
     # Secrets help to ecrypt the variables like password ,token ,API key etc.
+    # Suppose there is an actions which requires authentication , so here we can use GITHUB_TOKEN.
+    # https://docs.github.com/en/actions/security-guides/automatic-token-authentication
     runs-on: ubuntu-latest
     steps:
       - name: Echo Secrets variables
