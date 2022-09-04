@@ -51,6 +51,7 @@ jobs:
   
   Print-Secrets-Variables:
     # Define Secrets value by going into Repo SETTINGS->SECRETS
+    # A Secrets has a value limitation of 64KB.
     # Secrets help to ecrypt the variables like password ,token ,API key etc.
     # Suppose there is an actions which requires authentication , so here we can use GITHUB_TOKEN.
     # https://docs.github.com/en/actions/security-guides/automatic-token-authentication
@@ -63,6 +64,28 @@ jobs:
         run: |
           echo "Secret value which will be shown as *** ${secrets_env}"
           echo "Secret value which will be shown as *** ${Personal_Access_Token}"
+
+  Print-Secrets-Variables-Greater-Than-64KB:
+    # Secrets which are more than 64KB are stored in GitHub Repository branches using an encrypting method and then decrypting it later.
+    # So to encrpty a file using an tool gpg4win.
+    # https://docs.github.com/en/actions/security-guides/encrypted-secrets.
+    # Using an gpg command encrypt the file by applying a PASSPHRASE password. Commit the encrypted file and push it.
+    # Make a secret in the setting having PASSPHRASE password and use that secret in the workflow.
+    # So now to use the file secret value we need to checkout the repository on runner and decrypt it over there.
+    runs-on: ubuntu-latest
+    steps:
+      - name: Taking whole repository clone on runner
+        uses: actions/checkout@v1
+      - name: Decrypt Secret JSON file
+        env:
+          PASSPHRASE: ${{ secrets.PASSPHRASE }}
+        run: |
+          gpg --quiet --batch --yes --decrypt --passphrase="$PASSPHRASE" --output $HOME/secret.json
+          # --batch to prevent interactive command
+          # --yes to assume "yes" for questions
+      - name: Verify the values of JSON file after decrypting
+        run: 
+          cat secret.json 
 
 
 
