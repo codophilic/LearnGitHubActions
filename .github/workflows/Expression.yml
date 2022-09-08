@@ -72,7 +72,7 @@ jobs:
     steps:
       - name: Run all the JOBS even if one fails.
         run: eccho 'Failure Step'
-        timeout-minutes: 0
+        timeout-minutes: 0 
       - name: step-2 runs even of step-1 fails
         run: echo 'STEP-2 running even after STEP-1 failing'
       - name: step-3 runs even of step-1 fails
