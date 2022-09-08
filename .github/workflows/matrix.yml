@@ -6,12 +6,29 @@ jobs:
   node-version:
     # First we check the latest version and then we tell actions to take node-version as 6.
     # Suppose we want to run on multiple version , we can use strategy matrix.
+    # So in below strategy 9 (3x3) JOBS will be created.
     strategy:
       fail-fast: true # If its set true then It means if one of the items matrix fails then it won't execute other items.
-      matrix:
+      matrix: # we define an arbitary array having all the items.
         os: [ ubuntu-latest, macos-latest, wind ]
         node_version: [ 6, 8, 10 ]
-      max-parallel: 3 # Run all (3) the matrix items in parallel 
+
+        #Suppose we want to include a certain variable for certain configuration like
+        # we want to run only ubuntu-latest for node version 4.
+        include: # part of matrix schema
+          - os: ubuntu-latest
+            node_version: 4
+
+        #Suppose we want to exclude the job which has os has ubuntu-latest and macOS and nodeversion as 6.
+        exclude: #part of matrix schema
+          - os: ubuntu-latest
+            node_version: 6
+          - os: macos-latest
+            node_version: 6
+          
+      max-parallel: 3 # Run 3 JOBS parallely of the matrix items in parallel
+
+      
     runs-on: ${{ matrix.os }}
     steps: 
       - name: Log node version 
