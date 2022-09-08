@@ -12,10 +12,9 @@ jobs:
         env:
           directory: ./Shell files/run.sh
         run: |
-          cd $HOME
           pwd 
           ls 
-          chmod +x "$HOME/$directory"
-          sh "$HOME/$directory"
+          chmod +x "$directory"
+          sh "$directory"
 
 
