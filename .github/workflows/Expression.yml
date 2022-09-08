@@ -46,7 +46,38 @@ jobs:
       run: echo 'Not run'
     - name: Run step-4 always even if any step fails or succeed.
       if: always()
-      run: echo 'Always RUNS'      
+      run: echo 'Always RUNS'  
+
+  Run-All-JOBS-evenIF-oneFails-Using-ContinueOnError:
+    runs-on: ubuntu-latest
+    # Here suppose we want to run all jobs even if one fails we can use a key 'continue-on-error' 
+    # or 'timeout-minutes' after that failure JOB.
+    steps:
+      - name: Run all the JOBS even if one fails.
+        run: eccho 'Failure Step'
+        continue-on-error: true
+      - name: step-2 runs even of step-1 fails
+        run: echo 'STEP-2 running even after STEP-1 failing'
+      - name: step-3 runs even of step-1 fails
+        run: echo 'STEP-3 running even after STEP-1 failing'
+
+  Run-All-JOBS-evenIF-oneFails-Using-TimeoutMinutes:
+    runs-on: ubuntu-latest
+    # Here suppose we want to run all jobs even if one fails we can use a key 'continue-on-error' 
+    # or 'timeout-minutes' after that failure JOB.
+    timeout-minutes: 360
+    # Here 360 means 6 hours, this is the default maximum limit if a jobs takes to run, suppose any job
+    # takes more than 6 hours , actions will automatically cancel that workflows.
+    # We can increase or decrease the time as per our requirement.
+    steps:
+      - name: Run all the JOBS even if one fails.
+        run: eccho 'Failure Step'
+        timeout-minutes: 0
+      - name: step-2 runs even of step-1 fails
+        run: echo 'STEP-2 running even after STEP-1 failing'
+      - name: step-3 runs even of step-1 fails
+        run: echo 'STEP-3 running even after STEP-1 failing'
+
   LearnAboutContexts:
         # In expression ${{ secrets.GITHUB_TOKEN }} secrets are contexts which are called objects.
         # Contexts are a way to access information about workflow runs, runner environments, jobs, and steps. 
