@@ -1,0 +1,21 @@
+name: Run a shell script 
+
+on: push
+
+jobs:
+  ShellScript:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Take checkout  
+        uses: actions/checkout@v1
+      - name: Run
+        env:
+          directory: ./'Shell files'/run.sh
+        run: |
+          cd $HOME
+          ls 
+          echo ${directory}
+          chmod +x ${directory}
+          sh ${directory}
+
+
