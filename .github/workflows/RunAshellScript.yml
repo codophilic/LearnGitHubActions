@@ -14,8 +14,8 @@ jobs:
         run: |
           cd $HOME
           ls 
-          echo ${directory}
-          chmod +x ${directory}
-          sh ${directory}
+          echo "$directory"
+          chmod +x "$directory"
+          sh "$directory"
 
 
