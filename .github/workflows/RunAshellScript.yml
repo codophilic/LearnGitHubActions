@@ -4,6 +4,7 @@ on: push
 
 jobs:
   ShellScript:
+    # chmod is require to update the permission setting as an executable file.
     runs-on: ubuntu-latest
     steps:
       - name: Take checkout  
