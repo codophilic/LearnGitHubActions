@@ -1,0 +1,16 @@
+name: Matrix Run on multiple items 
+
+on: push
+
+jobs:
+  node-version:
+    # First we check the latest version and then we tell actions to take node-version as 6
+    runs-on: ubuntu-latest
+    steps: 
+      - name: Log node version 
+        run: node -v 
+      - uses: actions/setup-node@v1 
+        with:
+          node-version: 6
+      - name: Log node version
+        run: node -v 
