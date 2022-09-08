@@ -65,7 +65,7 @@ jobs:
     runs-on: ubuntu-latest
     # Here suppose we want to run all jobs even if one fails we can use a key 'continue-on-error' 
     # or 'timeout-minutes' after that failure JOB.
-    timeout-minutes: 360
+    # timeout-minutes: 360
     # Here 360 means 6 hours, this is the default maximum limit if a jobs takes to run, suppose any job
     # takes more than 6 hours , actions will automatically cancel that workflows.
     # We can increase or decrease the time as per our requirement.
