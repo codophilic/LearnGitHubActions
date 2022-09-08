@@ -4,13 +4,20 @@ on: push
 
 jobs:
   node-version:
-    # First we check the latest version and then we tell actions to take node-version as 6
-    runs-on: ubuntu-latest
+    # First we check the latest version and then we tell actions to take node-version as 6.
+    # Suppose we want to run on multiple version , we can use strategy matrix.
+    strategy:
+      fail-fast: true # If its set true then It means if one of the items matrix fails then it won't execute other items.
+      matrix:
+        os: [ ubuntu-latest, macos-latest, wind ]
+        node_version: [ 6, 8, 10 ]
+      max-parallel: 3 # Run all (3) the matrix items in parallel 
+    runs-on: ${{ matrix.os }}
     steps: 
       - name: Log node version 
         run: node -v 
       - uses: actions/setup-node@v1 
         with:
-          node-version: 6
+          node-version: ${{ matrix.node_version }}
       - name: Log node version
         run: node -v 
