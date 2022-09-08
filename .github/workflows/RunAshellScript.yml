@@ -13,7 +13,8 @@ jobs:
           directory: ./Shell files/run.sh
         run: |
           cd $HOME
-          ls 
+          ls
+          pwd 
           echo "$directory"
           chmod +x "$directory"
           sh "$directory"
