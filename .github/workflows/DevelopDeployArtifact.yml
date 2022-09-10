@@ -50,7 +50,7 @@ jobs:
         
   DEPLOY:
     runs-on: ubuntu-latest
-    #environment: Approver
+    environment: Approver
     needs: TESTCASES
     steps:
       - name: Download the Artifacts
@@ -67,7 +67,7 @@ jobs:
         if: github.event_name == 'push' #run the JOB if its a push event not pull request.
         run: |
           cd ${{ env.path }}
-          surge --project build --domain horrible-agreement.surge.sh
+          surge --project build --domain react-agreement.surge.sh
         # Basically surge is an interactive CLI which ask for build folder and displays the domain name.
         # So we here provided surge a custom domain name or the last domain name in which it was deployed.
         # Every time we run surge command locally it creates an random domain.
