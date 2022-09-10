@@ -97,7 +97,8 @@ jobs:
           SURGE_LOGIN: ${{ secrets.SURGE_LOGIN }}
           SURGE_TOKEN: ${{ secrets.SURGE_TOKEN }}
       - name: Create issue when prod deployment fails.
-        if: steps.production-deployment.outcome == 'failure'
+        # Use the condition != 'success' as it is. This step generates automated issues.
+        if: steps.production-deployment.outcome != 'success'
         run: |
           curl --request POST \
           --url https://api.github.com/repos/$GITHUB_REPOSITORY/issues \
