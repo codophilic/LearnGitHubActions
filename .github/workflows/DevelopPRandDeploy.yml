@@ -97,7 +97,7 @@ jobs:
           SURGE_LOGIN: ${{ secrets.SURGE_LOGIN }}
           SURGE_TOKEN: ${{ secrets.SURGE_TOKEN }}
       - name: Create Auto Releases
-        if: github.event_name == 'push' && github.refs == 'refs/heads/main'
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
         run: |
           cd ${{ env.path }}
           npx semantic-releases
