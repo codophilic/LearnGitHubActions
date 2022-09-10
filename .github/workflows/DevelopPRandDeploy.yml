@@ -45,7 +45,7 @@ jobs:
         run: |
           pwd
           ls 
-          actions/checkout@v2
+      - uses: actions/checkout@v2
       - name: Build after passing TestCases checks only.
         run: |
           cd ${{ env.path }}
