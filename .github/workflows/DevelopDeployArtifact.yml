@@ -1,4 +1,4 @@
-name: Before deploying react application pull request status check test cases
+name: Deployment using Artifacts
 
 on: 
   pull_request:
@@ -42,7 +42,6 @@ jobs:
           name: Reactartifact
   BUILD:
     runs-on: ubuntu-latest
-    #environment: Approver
     steps:
       - name: Download the Artifacts
         uses: actions/download-artifact@v3
