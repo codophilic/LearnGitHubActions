@@ -2,3 +2,4 @@
 2. All workflows must be under '.github/workflows' folder.
 3. A workflows can consists of multiple YAML workflows files.
 4. Set-up notifications for workflows so that when a job fails you get notifications.
+5. Whenever A new JOB is started a fresh environments is created. Previous JOB environments does not exists.

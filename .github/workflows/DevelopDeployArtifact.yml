@@ -1,0 +1,80 @@
+name: Deployment using Artifacts
+
+on: 
+  pull_request:
+    branches:
+      - develop
+  push:
+    branches:
+      - develop
+env:
+  path: ./ReactApplication/my-react-application/
+
+jobs:
+  TESTCASES:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout the repositories
+        uses: actions/checkout@v2
+      - name: set-up a specific node version on runner
+        uses: actions/setup-node@v1
+        with:
+          node-version: "12.x"
+      - name: Installing Dependencies
+        run: |
+          cd ${{ env.path }}
+          npm ci 
+      - name: Check Prettier Formats
+        run: |
+          cd ${{ env.path }}
+          npm run format:check
+      - name: Run Automated test for Code coverage
+        run: |
+          pwd
+          ls
+          cd ${{ env.path }}
+          npm test -- --coverage
+        env:
+          CI: true
+      - name: Build
+        if: github.event_name == 'push' #run the JOB if its a push event not pull request.
+        run: |
+          cd ${{ env.path }}
+          npm run build        
+      - name: Upload the Artifacts so that next JOB can take it. 
+        uses: actions/upload-artifact@v3
+        with:
+          name: ReactBuild
+          path: ${{ env.path }}build/
+
+        
+  DEPLOY:
+    runs-on: ubuntu-latest
+    environment: Approver
+    needs: TESTCASES
+    steps:
+      - name: Download the Artifacts
+        uses: actions/download-artifact@v3
+        with:
+          name: ReactBuild
+          path: ${{ env.path }}build/
+      - name: Installing surge on runners
+        if: github.event_name == 'push' #run the JOB if its a push event not pull request.
+        run: |
+          cd ${{ env.path }}
+          npm install -g surge
+      - name: After success full build deploy it.
+        if: github.event_name == 'push' #run the JOB if its a push event not pull request.
+        run: |
+          cd ${{ env.path }}
+          surge --project build --domain react-agreement.surge.sh
+        # Basically surge is an interactive CLI which ask for build folder and displays the domain name.
+        # So we here provided surge a custom domain name or the last domain name in which it was deployed.
+        # Every time we run surge command locally it creates an random domain.
+        env:
+          SURGE_LOGIN: ${{ secrets.SURGE_LOGIN }}
+          SURGE_TOKEN: ${{ secrets.SURGE_TOKEN }}
+      
+
+
+
