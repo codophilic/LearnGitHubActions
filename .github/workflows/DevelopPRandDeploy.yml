@@ -99,7 +99,7 @@ jobs:
       - name: Create issue when prod deployment fails.
         # Use the condition != 'success' as it is. This step generates automated issues.
         # When a continue-on-error step fails, the outcome is failure, but the final conclusion is success.
-        if: steps.production-deployment.outcome != 'success'
+        if: steps.production-deployment.outcome == 'failure'
         run: |
           curl --request POST \
           --url https://api.github.com/repos/$GITHUB_REPOSITORY/issues \
