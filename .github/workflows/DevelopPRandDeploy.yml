@@ -99,7 +99,7 @@ jobs:
           SURGE_TOKEN: ${{ secrets.SURGE_TOKEN }}
 
       # DEBUGGING of a STEPS 
-      # - if: steps.prod.outcome != 'success'
+      - if: always()
       - run: |
           echo '${{ toJSON(steps) }}'
       
