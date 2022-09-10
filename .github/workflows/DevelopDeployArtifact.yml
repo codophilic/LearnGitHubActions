@@ -46,6 +46,9 @@ jobs:
         with:
           name: Reactartifact
           path: ./path/Artifacts/
+      - run: |
+          cd ./path/Artifacts/
+          ls
   BUILD:
     runs-on: ubuntu-latest
     steps:
