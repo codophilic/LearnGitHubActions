@@ -76,7 +76,7 @@ jobs:
           cd ${{ env.path }}
           npm install -g surge
       - name: After success full build deploy it.
-        if: github.event_name == 'push' && github.refs == 'refs/heads/develop' #run the JOB if its a push event not pull request.
+        if: github.event_name == 'push' && github.ref == 'refs/heads/develop' #run the JOB if its a push event not pull request.
         run: |
           cd ${{ env.path }}
           surge --project build --domain horrible-agreement.surge.sh
@@ -88,7 +88,7 @@ jobs:
           SURGE_TOKEN: ${{ secrets.SURGE_TOKEN }}
       
       - name: Production deployment
-        if: github.event_name == 'push' && github.refs == 'refs/heads/main'
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
         run: |
           cd ${{ env.path }}
           surge --project build --domain production-reactdeployed.surge.sh
