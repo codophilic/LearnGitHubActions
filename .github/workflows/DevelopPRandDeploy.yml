@@ -50,6 +50,7 @@ jobs:
         with:
           name: Reports of Code coverage #name of our artifiacts
           path: ${{ env.path }}coverage # path provided to github to take it and upload it .
+        # At the bottom of the workflow summary page, there is a dedicated section for artifacts where the artifacts are stored.
 
 
 

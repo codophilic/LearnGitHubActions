@@ -46,7 +46,7 @@ jobs:
         with:
           name: ReactBuild
           path: ${{ env.path }}build/
-
+        # At the bottom of the workflow summary page, there is a dedicated section for artifacts where the artifacts are stored.
         
   DEPLOY:
     runs-on: ubuntu-latest
