@@ -30,6 +30,8 @@ jobs:
           npm run format:check
       - name: Run Automated test for Code coverage
         run: |
+          pwd
+          ls
           cd ${{ env.path }}
           npm test -- --coverage
         env:
@@ -39,6 +41,11 @@ jobs:
     needs: TESTCASES
     if: github.event_name == 'push' #run the JOB if its a push event not pull request.
     steps:
+      - name: Taking checkout 
+        run: |
+          pwd
+          ls 
+          actions/checkout@v2
       - name: Build after passing TestCases checks only.
         run: |
           cd ${{ env.path }}
