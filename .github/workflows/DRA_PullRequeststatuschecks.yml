@@ -4,6 +4,9 @@ on:
   pull_request:
     branches:
       - develop
+  push:
+    branches:
+      - develop
 
 jobs:
   TESTCASES:
@@ -31,5 +34,30 @@ jobs:
           npm test -- --coverage
         env:
           CI: true
+  BUILD:
+    runs-on: ubuntu-latest
+    needs: TESTCASES
+    if: github.event_name == 'push' #run the JOB if its a push event not pull request.
+    steps:
+      - name: Build after passing TestCases checks only.
+        run: npm run build
+  
+  DEPLOY:
+    runs-on: ubuntu-latest
+    needs: BUILD
+    if: github.event_name == 'push' # on push events
+    steps:
+      - name: Installing surge on runners
+        run: npm install -g surge
+      - name: After success full build deploy it. 
+        run: surge --project ${{ env.path }}build --domain horrible-agreement.surge.sh
+        # Basically surge is an interactive CLI which ask for build folder and displays the domain name.
+        # So we here provided surge a custom domain name or the last domain name in which it was deployed.
+        # Every time we run surge command locally it creates an random domain.
+        env:
+          SURGE_LOGIN: ${{ secrets.SURGE_LOGIN }}
+          SURGE_TOKEN: ${{ secrets.SURGE_TOKEN }}
+      
+
 
 

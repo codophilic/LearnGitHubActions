@@ -17,13 +17,13 @@ Test Checks that we can implement:
 1. Using prettier format we can check files if others have made changes in proper format or not.
 2. About the npm run test:
     When we run the command, npm run test , so its an interactive testing which ask and also listen the changes continously.
-                  Watch Usage
-                › Press a to run all tests.
-                › Press f to run only failed tests.
-                › Press q to quit watch mode.
-                › Press p to filter by a filename regex pattern.
-                › Press t to filter by a test name regex pattern.
-                › Press Enter to trigger a test run.
+    Watch Usage
+  › Press a to run all tests.
+  › Press f to run only failed tests.
+  › Press q to quit watch mode.
+  › Press p to filter by a filename regex pattern.
+  › Press t to filter by a test name regex pattern.
+  › Press Enter to trigger a test run.
     so to break this interactive testing , we need to use a variable 'CI=true npm run test'.
     we can get the reports of the test by using coverage reports which states which files are tested which are not and accuracy.
     cmd: CI=true npm run test -- --coverage
@@ -43,3 +43,19 @@ On in our Workflow:
 7. If the workflow fails , it will create an automatically issues.
 8. If an issues is created send a notification to the team.
 9. Create a new release if success and send a notification to the team.
+
+By the we need to add the required status on the setting of branch protection policies when the workflow is push
+or pull request is raised for first time.
+
+ABOUT surge:
+ # Basically surge is an interactive CLI which ask for build folder and displays the domain name.
+ # So we here provided surge a custom domain name or the last domain name in which it was deployed.
+ # Every time we run surge command locally it creates an random domain.
+
+ cmd: surge list -> list downs all domain name in which your deployment was done.
+ cmd: surge teardown domain_name -> removes the domain name from the list.
+ when we run surge locally , its authenticates automatically.
+ So for runners we need to authenticate for it.
+ So for authentication run command 'surge token' it will shows the token
+ and login is your mail ID.
+
