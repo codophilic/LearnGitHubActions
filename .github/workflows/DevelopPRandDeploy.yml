@@ -92,17 +92,31 @@ jobs:
         if: github.event_name == 'push' && github.ref == 'refs/heads/main'
         run: |
           cd ${{ env.path }}
-          npx surge --project build --domain production-reactdeployed.surge.sh
+          npx urge --project build --domain production-reactdeployed.surge.sh
         env:
           SURGE_LOGIN: ${{ secrets.SURGE_LOGIN }}
           SURGE_TOKEN: ${{ secrets.SURGE_TOKEN }}
+      - name: Create issue when prod deployment fails.
+        if: github.event_name == 'pull_request' && github.ref == 'refs/heads/main' && failure()
+        run: |
+          curl --request POST \
+          --url https://api.github.com/repos/$GITHUB_REPOSITORY/issues \
+          --header 'authorization: Bearer ${{ secrets.GITHUB_TOKEN }}' \
+          --header 'content-type: application/json' \
+          --data '{
+            "title": "Automated issue of Production Deployment failed for commit: ${{ github.sha }} ",
+            "body": "This issue was automatically created by the GitHub Action workflow **${{ github.workflow }}** . \n\n The commit hash was:_${{ github.sha }}_. ",
+            "assignees": ["${{ github.event.pull_request.user.login }}"]
+            }' \
+          --fail
       - name: Creating Zip
+        if: failure() && github.event_name == 'push' && github.ref == 'refs/heads/main'
         run: |
           cd ${{ env.path }}
           zip -r build.zip build
           zip -r coverage.zip coverage 
       - name: Create Auto Releases
-        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main' && failure()
         run: |
           cd ${{ env.path }}
           npx semantic-release
