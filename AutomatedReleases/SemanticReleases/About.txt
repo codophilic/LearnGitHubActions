@@ -1,0 +1,14 @@
+For releases we can use Semantic Versioning.
+semantic-release is a Node CLI application, but it can be used to publish any type of packages. (https://semantic-release.gitbook.io/semantic-release/support/faq)
+Semantic Version has some standard convections. (https://semver.org/)
+it consists of 3 parts: Suppose my version is 2.1.3
+MAJOR Version: 2 - This part gets updated when there are breaking changes. E.g suppose we have some open-source library can its consume by users and if we updated something in library which can break the code of other users.
+MINOR Version: 1 - This parts gets updated when there are some functionality which does not have breaking changes like new features.
+PATCH Version: 3 - Bug fixes.
+
+https://github.com/semantic-release/semantic-release/blob/master/docs/usage/configuration.md
+
+convections commits
+https://www.conventionalcommits.org/en/v1.0.0/
+
+So first we need to create a release.config.js in our application and add the configuration for it.
