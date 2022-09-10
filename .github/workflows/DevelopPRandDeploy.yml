@@ -100,7 +100,7 @@ jobs:
         run: |
           cd ${{ env.path }}
           zip -r build.zip build
-          zip -r coverage.zip coverage
+          zip -r coverage.zip coverage 
       - name: Create Auto Releases
         if: github.event_name == 'push' && github.ref == 'refs/heads/main'
         run: |
