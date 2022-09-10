@@ -1,0 +1,27 @@
+name: Before deploying react application pull request status check test cases
+
+on: 
+  pull_request:
+    branches:
+      - develop
+
+jobs:
+  TESTCASES:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout the repositories
+        uses: actions/checkout@v2
+      - name: set-up a specific node version on runner
+        uses: actions/setup-node@v1
+        with:
+          node-version: "12.x"
+      - name: Installing Dependencies
+        run: npm ci 
+      - name: Check Prettier Formats
+        run: npm run format:check
+      - name: Run Automated test for Code coverage
+        run: npm test -- --coverage
+        env:
+          CI: true
+
+
