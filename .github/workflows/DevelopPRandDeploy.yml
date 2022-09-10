@@ -98,25 +98,25 @@ jobs:
           SURGE_LOGIN: ${{ secrets.SURGE_LOGIN }}
           SURGE_TOKEN: ${{ secrets.SURGE_TOKEN }}
 
-      # DEBUGGING of a STEPS 
-      - if: always()
-        run: |
-          echo '${{ toJSON(steps) }}'
-      
-      # - name: Create issue when prod deployment fails.
-      #   # Automated issues.
-      #   if: steps.prod.outcome != "skipped" 
+      # # DEBUGGING of a STEPS 
+      # - if: always()
       #   run: |
-      #     curl --request POST \
-      #     --url https://api.github.com/repos/$GITHUB_REPOSITORY/issues \
-      #     --header 'authorization: Bearer ${{ secrets.GITHUB_TOKEN }}' \
-      #     --header 'content-type: application/json' \
-      #     --data '{
-      #       "title": "Automated issue of production failure for commit: ${{ github.event.head_commit.message }} ",
-      #       "body": "This issue was automatically created by the GitHub Action workflow **${{ github.workflow }}** . \n\n The commit hash was:_${{ github.sha }}_. ",
-      #       "assignees": ["${{ github.event.pull_request.user.login }}"]
-      #       }' \
-      #     --fail
+      #     echo '${{ toJSON(steps) }}'
+      
+      - name: Create issue when prod deployment fails.
+        # Automated issues.
+        if: steps.prod.outcome == "failure" 
+        run: |
+          curl --request POST \
+          --url https://api.github.com/repos/$GITHUB_REPOSITORY/issues \
+          --header 'authorization: Bearer ${{ secrets.GITHUB_TOKEN }}' \
+          --header 'content-type: application/json' \
+          --data '{
+            "title": "Automated issue of production failure for commit: ${{ github.event.head_commit.message }} ",
+            "body": "This issue was automatically created by the GitHub Action workflow **${{ github.workflow }}** . \n\n The commit hash was:_${{ github.sha }}_. ",
+            "assignees": ["${{ github.event.pull_request.user.login }}"]
+            }' \
+          --fail
 
       - name: Creating Zip file 
         if: steps.production-deployment.outcome == 'success'
