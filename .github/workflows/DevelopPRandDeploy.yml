@@ -80,7 +80,7 @@ jobs:
         run: |
           cd ${{ env.path }}
           ls 
-          surge --project build --domain pointless-finger.surge.sh
+          npx surge --project build --domain pointless-finger.surge.sh
         # Basically surge is an interactive CLI which ask for build folder and displays the domain name.
         # So we here provided surge a custom domain name or the last domain name in which it was deployed.
         # Every time we run surge command locally it creates an random domain.
@@ -92,7 +92,7 @@ jobs:
         if: github.event_name == 'push' && github.ref == 'refs/heads/main'
         run: |
           cd ${{ env.path }}
-          surge --project build --domain production-reactdeployed.surge.sh
+          npx surge --project build --domain production-reactdeployed.surge.sh
         env:
           SURGE_LOGIN: ${{ secrets.SURGE_LOGIN }}
           SURGE_TOKEN: ${{ secrets.SURGE_TOKEN }}
@@ -100,7 +100,7 @@ jobs:
         if: github.event_name == 'push' && github.ref == 'refs/heads/main'
         run: |
           cd ${{ env.path }}
-          npx semantic-releases
+          npx semantic-release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       
