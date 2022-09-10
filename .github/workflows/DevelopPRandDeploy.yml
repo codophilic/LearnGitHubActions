@@ -98,13 +98,14 @@ jobs:
           SURGE_LOGIN: ${{ secrets.SURGE_LOGIN }}
           SURGE_TOKEN: ${{ secrets.SURGE_TOKEN }}
 
-      - if: steps.prod.outcome != 'success'
-        run: |
+      # DEBUGGING of a STEPS 
+      # - if: steps.prod.outcome != 'success'
+      - run: |
           echo '${{ toJSON(steps) }}'
       
       - name: Create issue when prod deployment fails.
         # Automated issues.
-        if: steps.prod.outcome != 'success' 
+        if: steps.prod.outcome != "skipped" 
         run: |
           curl --request POST \
           --url https://api.github.com/repos/$GITHUB_REPOSITORY/issues \
