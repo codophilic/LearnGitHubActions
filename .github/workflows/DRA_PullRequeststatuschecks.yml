@@ -8,6 +8,8 @@ on:
 jobs:
   TESTCASES:
     runs-on: ubuntu-latest
+    env:
+      path: ./ReactApplication/my-react-application/
     steps:
       - name: Checkout the repositories
         uses: actions/checkout@v2
@@ -16,11 +18,17 @@ jobs:
         with:
           node-version: "12.x"
       - name: Installing Dependencies
-        run: npm ci 
+        run: |
+          cd ${{ env.path }}
+          npm ci 
       - name: Check Prettier Formats
-        run: npm run format:check
+        run: |
+          cd ${{ env.path }}
+          npm run format:check
       - name: Run Automated test for Code coverage
-        run: npm test -- --coverage
+        run: |
+          cd ${{ env.path }}
+          npm test -- --coverage
         env:
           CI: true
 
