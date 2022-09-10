@@ -98,20 +98,20 @@ jobs:
           SURGE_LOGIN: ${{ secrets.SURGE_LOGIN }}
           SURGE_TOKEN: ${{ secrets.SURGE_TOKEN }}
       - name: Create issue when prod deployment fails.
-        # Use the condition != 'success' as it is. This step generates automated issues.
-        # When a continue-on-error step fails, the outcome is failure, but the final conclusion is success.
-        if: failure()
+        # Automated issues.
+        if: failure() && github.event_name == 'pull_request'
         run: |
           curl --request POST \
           --url https://api.github.com/repos/$GITHUB_REPOSITORY/issues \
           --header 'authorization: Bearer ${{ secrets.GITHUB_TOKEN }}' \
           --header 'content-type: application/json' \
           --data '{
-            "title": "Automated issue of Production Deployment failed for commit: ${{ github.event.head_commit.message }} ",
+            "title": "Automated issue of production failure for commit: ${{ github.event.head_commit.message }} ",
             "body": "This issue was automatically created by the GitHub Action workflow **${{ github.workflow }}** . \n\n The commit hash was:_${{ github.sha }}_. ",
             "assignees": ["${{ github.event.pull_request.user.login }}"]
             }' \
           --fail
+
       - name: Creating Zip file 
         if: steps.production-deployment.outcome == 'success'
         run: |
