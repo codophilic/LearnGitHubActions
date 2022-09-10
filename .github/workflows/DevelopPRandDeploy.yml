@@ -93,14 +93,17 @@ jobs:
         run: |
           cd ${{ env.path }}
           npx urge --project build --domain production-reactdeployed.surge.sh
-          echo ${{ steps.production-deployment.outcome }}
         env:
           SURGE_LOGIN: ${{ secrets.SURGE_LOGIN }}
           SURGE_TOKEN: ${{ secrets.SURGE_TOKEN }}
+      - run: |
+          echo ${{ steps.production-deployment.conclusion }}
+          echo ${{ steps.production-deployment.outcome }}
+
       - name: Create issue when prod deployment fails.
         # Use the condition != 'success' as it is. This step generates automated issues.
         # When a continue-on-error step fails, the outcome is failure, but the final conclusion is success.
-        if: steps.production-deployment.outcome == 'failure'
+        if: steps.production-deployment.conclusion == 'failure'
         run: |
           curl --request POST \
           --url https://api.github.com/repos/$GITHUB_REPOSITORY/issues \
