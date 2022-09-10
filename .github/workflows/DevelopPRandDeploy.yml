@@ -30,7 +30,7 @@ jobs:
       - name: set-up a specific node version on runner
         uses: actions/setup-node@v1
         with:
-          node-version: "12.x"
+          node-version: "16.x"
       - name: Installing Dependencies
         run: |
           cd ${{ env.path }}
