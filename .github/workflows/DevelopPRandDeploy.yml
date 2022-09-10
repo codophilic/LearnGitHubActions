@@ -105,7 +105,7 @@ jobs:
       
       - name: Create issue when prod deployment fails.
         # Automated issues.
-        if: steps.prod.outcome == "failure" 
+        if: steps.prod.outcome == 'failure'
         run: |
           curl --request POST \
           --url https://api.github.com/repos/$GITHUB_REPOSITORY/issues \
