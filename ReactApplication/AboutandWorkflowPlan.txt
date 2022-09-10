@@ -1,0 +1,61 @@
+package.JSON file
+    "start": "react-scripts start", --> Use to start development server , cd into the directory and run command: npm run start , it will run application on localhost
+    "build": "react-scripts build", --> Use to build cmd: npm run build, makes an optimize folder.
+    "test": "react-scripts test", --> Use to test cmd : npm run test ( basically in the App.test.js it will check that if the title is same as 'Learn React', if its so it will pass the test or it will fail it. If in App.js we change title the test will fail)
+    "eject": "react-scripts eject"
+    "format:check": "prettier --check" ->customised script added which is use to check if all files are properly formatted or not cmd: npm run format:check
+    "fromat": "prettier --write" ->customised script added which formats the files as per prettier.
+
+Here we will deploy the build of React application on a static web page of surge.
+So basically we first build the application using cmd: npm run build. this creates a build folder within the directory.
+and using cmd: surge , the application build is deployed on surge servers.
+Here surge creates a domain and deploys the build in that domain.
+Copy the domain,paste it on browser and see the application on it.
+(MANUAL PROCESS)
+
+Test Checks that we can implement:
+1. Using prettier format we can check files if others have made changes in proper format or not.
+2. About the npm run test:
+    When we run the command, npm run test , so its an interactive testing which ask and also listen the changes continously.
+    Watch Usage
+  › Press a to run all tests.
+  › Press f to run only failed tests.
+  › Press q to quit watch mode.
+  › Press p to filter by a filename regex pattern.
+  › Press t to filter by a test name regex pattern.
+  › Press Enter to trigger a test run.
+    so to break this interactive testing , we need to use a variable 'CI=true npm run test'.
+    we can get the reports of the test by using coverage reports which states which files are tested which are not and accuracy.
+    cmd: CI=true npm run test -- --coverage
+    this generates an coverage folder with details in  Icov-report/index.html file.
+3. Installing dependencies like node modules etc.
+
+
+
+
+On in our Workflow:
+1. For a new feature, a featur branch will be created from develop.
+2. Pull request will be raise and a workflow will be run, after all checks pass tests code reviewer will provide approval.
+3. Merge into develop branch, after merging a workflow will be run will run some checks and will deploy code to development sort of servers on surge.
+4. So when develop branch is ready pr will be raise into main.
+5. Workflow will be run for status checks before merging. After approval it will merge.
+6. After merging on main, workflow will be run with some checks and deployment.
+7. If the workflow fails , it will create an automatically issues.
+8. If an issues is created send a notification to the team.
+9. Create a new release if success and send a notification to the team.
+
+By the we need to add the required status on the setting of branch protection policies when the workflow is push
+or pull request is raised for first time.
+
+ABOUT surge:
+ # Basically surge is an interactive CLI which ask for build folder and displays the domain name.
+ # So we here provided surge a custom domain name or the last domain name in which it was deployed.
+ # Every time we run surge command locally it creates an random domain.
+
+ cmd: surge list -> list downs all domain name in which your deployment was done.
+ cmd: surge teardown domain_name -> removes the domain name from the list.
+ when we run surge locally , its authenticates automatically.
+ So for runners we need to authenticate for it.
+ So for authentication run command 'surge token' it will shows the token
+ and login is your mail ID.
+
