@@ -12,11 +12,19 @@ env:
 
 jobs:
   TESTCASES:
-    environment: Approver
+    #environment: Approver
     runs-on: ubuntu-latest
     steps:
       - name: Checkout the repositories
         uses: actions/checkout@v2
+      - name: Using canche from actions
+        uses: actions/cache@v1
+        with:
+          path: ~/.npm # Differs due to package manager
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }} # a variable or static key
+          restore-keys: |
+            ${{ runner.os }}-node-
+          # If github does not find ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }} , it will search in restore key.
       - name: set-up a specific node version on runner
         uses: actions/setup-node@v1
         with:
@@ -37,12 +45,28 @@ jobs:
           npm test -- --coverage
         env:
           CI: true
+      - name: Upload Test Coverage reports as an artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: Reports of Code coverage #name of our artifiacts
+          path: ${{ env.path }}coverage # path provided to github to take it and upload it .
+        # At the bottom of the workflow summary page, there is a dedicated section for artifacts where the artifacts are stored.
+
+
+
       - name: Build after passing TestCases checks only.
         if: github.event_name == 'push' #run the JOB if its a push event not pull request.
         run: |
           cd ${{ env.path }}
           npm run build
-        
+      - name: Upload Build
+        uses: actions/checkout@v3
+        if: github.event_name == 'push' #run the JOB if its a push event not pull request.
+        with:
+          name: Build
+          path: ${{ env.path }}build
+
+
 
       - name: Installing surge on runners
         if: github.event_name == 'push' #run the JOB if its a push event not pull request.
