@@ -93,6 +93,7 @@ jobs:
         run: |
           cd ${{ env.path }}
           npx urge --project build --domain production-reactdeployed.surge.sh
+          echo ${{ steps.production-deployment.outcome }}
         env:
           SURGE_LOGIN: ${{ secrets.SURGE_LOGIN }}
           SURGE_TOKEN: ${{ secrets.SURGE_TOKEN }}
