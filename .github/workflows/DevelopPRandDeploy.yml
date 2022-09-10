@@ -97,7 +97,7 @@ jobs:
           SURGE_LOGIN: ${{ secrets.SURGE_LOGIN }}
           SURGE_TOKEN: ${{ secrets.SURGE_TOKEN }}
       - name: Create issue when prod deployment fails.
-        if: github.event_name == 'pull_request' && github.ref == 'refs/heads/main' && failure()
+        if: github.event_name == 'pull_request' && failure()
         run: |
           curl --request POST \
           --url https://api.github.com/repos/$GITHUB_REPOSITORY/issues \
@@ -110,13 +110,13 @@ jobs:
             }' \
           --fail
       - name: Creating Zip
-        if: failure() && github.event_name == 'push' && github.ref == 'refs/heads/main'
+        if: steps.production-deployment.outcome == 'success'
         run: |
           cd ${{ env.path }}
           zip -r build.zip build
           zip -r coverage.zip coverage 
       - name: Create Auto Releases
-        if: github.event_name == 'push' && github.ref == 'refs/heads/main' && failure()
+        if: steps.production-deployment.outcome == 'success'
         run: |
           cd ${{ env.path }}
           npx semantic-release
