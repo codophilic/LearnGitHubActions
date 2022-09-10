@@ -94,7 +94,6 @@ jobs:
         run: |
           cd ${{ env.path }}
           npx urge --project build --domain production-reactdeployed.surge.sh
-        continue-on-error: true
         env:
           SURGE_LOGIN: ${{ secrets.SURGE_LOGIN }}
           SURGE_TOKEN: ${{ secrets.SURGE_TOKEN }}
@@ -106,7 +105,7 @@ jobs:
       
       - name: Create issue when prod deployment fails.
         # Automated issues.
-        if: github.event_name == 'pull_request' 
+        if: failure() && github.event_name == 'push' &&  github.ref == 'refs/heads/main'
         run: |
           curl --request POST \
           --url https://api.github.com/repos/$GITHUB_REPOSITORY/issues \
