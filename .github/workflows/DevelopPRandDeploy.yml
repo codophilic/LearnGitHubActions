@@ -97,9 +97,14 @@ jobs:
         env:
           SURGE_LOGIN: ${{ secrets.SURGE_LOGIN }}
           SURGE_TOKEN: ${{ secrets.SURGE_TOKEN }}
+
+      - if: steps.prod.outcome != 'success'
+        run: |
+          echo '${{ toJSON(steps) }}'
+      
       - name: Create issue when prod deployment fails.
         # Automated issues.
-        if: ${{ failure() && steps.prod.conclusion == 'failure' }}
+        if: steps.prod.outcome != 'success' 
         run: |
           curl --request POST \
           --url https://api.github.com/repos/$GITHUB_REPOSITORY/issues \
