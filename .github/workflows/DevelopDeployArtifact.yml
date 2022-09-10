@@ -45,18 +45,19 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: Reactartifact
-          path: ./path/Artifacts/
+          path: ${HOME}/path/Artifacts/
       - run: |
           cd ./path/Artifacts/
           ls
   BUILD:
     runs-on: ubuntu-latest
+    needs: TESTCASES
     steps:
       - name: Download the Artifacts
         uses: actions/download-artifact@v3
         with:
           name: Reactartifact
-          path: ./path/Artifacts/
+          path: ${HOME}/path/Artifacts/
       - run: |
           pwd
           ls 
@@ -70,6 +71,7 @@ jobs:
   DEPLOY:
     runs-on: ubuntu-latest
     environment: Approver
+    needs: BUILD
     steps:
       - name: Installing surge on runners
         if: github.event_name == 'push' #run the JOB if its a push event not pull request.
