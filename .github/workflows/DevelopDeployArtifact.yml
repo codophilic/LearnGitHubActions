@@ -41,7 +41,7 @@ jobs:
           ls
           mkdir -p path/Artifacts/
           echo ${HOME}
-      - name: Upload the Artifacts so that next JOB can take it.
+      - name: Upload the Artifacts so that next JOB can take it. 
         uses: actions/upload-artifact@v3
         with:
           name: Reactartifact
