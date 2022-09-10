@@ -7,12 +7,12 @@ on:
   push:
     branches:
       - develop
+env:
+  path: ./ReactApplication/my-react-application/
 
 jobs:
   TESTCASES:
     runs-on: ubuntu-latest
-    env:
-      path: ./ReactApplication/my-react-application/
     steps:
       - name: Checkout the repositories
         uses: actions/checkout@v2
