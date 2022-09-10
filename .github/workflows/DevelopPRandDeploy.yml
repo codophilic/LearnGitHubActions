@@ -100,7 +100,7 @@ jobs:
 
       # DEBUGGING of a STEPS 
       - if: always()
-      - run: |
+        run: |
           echo '${{ toJSON(steps) }}'
       
       # - name: Create issue when prod deployment fails.
