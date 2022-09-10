@@ -12,6 +12,7 @@ env:
 
 jobs:
   TESTCASES:
+    environment: Approver
     runs-on: ubuntu-latest
     steps:
       - name: Checkout the repositories
@@ -41,8 +42,7 @@ jobs:
         run: |
           cd ${{ env.path }}
           npm run build
-        env:
-          name: Approver
+        
 
       - name: Installing surge on runners
         if: github.event_name == 'push' #run the JOB if its a push event not pull request.
