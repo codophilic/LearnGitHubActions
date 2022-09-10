@@ -12,11 +12,19 @@ env:
 
 jobs:
   TESTCASES:
-    environment: Approver
+    #environment: Approver
     runs-on: ubuntu-latest
     steps:
       - name: Checkout the repositories
         uses: actions/checkout@v2
+      - name: Using canche from actions
+        uses: actions/cache@v1
+        with:
+          path: ~/.npm # Differs due to package manager
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }} # a variable or static key
+          restore-key: |
+            ${{ runner.os }}-node-
+          # If github does not find ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }} , it will search in restore key.
       - name: set-up a specific node version on runner
         uses: actions/setup-node@v1
         with:
